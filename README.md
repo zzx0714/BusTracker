@@ -75,7 +75,7 @@ BusTracker/
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/your-username/BusTracker.git
+git clone https://github.com/zzx0714/BusTracker.git
 cd BusTracker
 ```
 
@@ -283,7 +283,7 @@ node linkRoutes.js    # 关联线路和站点
 如有问题或建议，欢迎通过以下方式联系：
 
 - 提交 GitHub Issue
-- 邮箱：your-email@example.com
+- 邮箱：18965125225@163.com
 
 ## 🙏 致谢
 
