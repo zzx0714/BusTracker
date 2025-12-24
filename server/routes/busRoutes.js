@@ -13,6 +13,32 @@ router.get('/', async (req, res) => {
   }
 });
 
+// 模糊查询线路（按编号、起点、终点、站点匹配）
+router.get('/search', async (req, res) => {
+  const keyword = (req.query.keyword || '').trim();
+  if (!keyword) {
+    return res.json([]);
+  }
+
+  // 将用户输入转为不区分大小写的安全正则
+  const safeRegex = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+
+  try {
+    const routes = await BusRoute.find({
+      $or: [
+        { routeNumber: safeRegex },
+        { startStation: safeRegex },
+        { endStation: safeRegex },
+        { stations: safeRegex }
+      ]
+    });
+
+    res.json(routes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // 2. 根据线路编号查询线路（GET请求）
 router.get('/:routeNumber', async (req, res) => {
   try {
